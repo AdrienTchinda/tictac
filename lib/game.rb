@@ -58,7 +58,6 @@ class Game
   def turn
     #AFFICHER C EST LE TOUR DU 
     puts "It's now #{current_player.token}'s turn."
-    print board.turn_count
     input = current_player.move(board).to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
