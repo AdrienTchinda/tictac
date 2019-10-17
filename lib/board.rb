@@ -1,10 +1,13 @@
+#CLASSE DU TABLEAU
 class Board
   attr_accessor :cells
+
+  #INITIALISE L ARRAY CELLS DANS LA METHODE RESET
   def initialize
     reset
   end
 
-  #REINITIALISE LE ARRAY DU JEU A DES STRING VIDES
+  #INITIALISE LE ARRAY DU JEU A DES ELEMENTS EGAUX A DES STRING VIDES
   def reset
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
@@ -18,13 +21,9 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  #PERMET DE POSITIONNER LE PION DANS LA CELLULE INPUT - 1
-  def position(input)
-    input = input.to_i
-    cells[input - 1]
-  end
+  #RETOURNE FALSE SI LE TABLEAU CELLS A ENCORE DES CASES EGALES A " "
   def full?
-    cells.none? {|cell| cell == " " || cell == nil}
+    cells.none? {|cell| cell == " "}
   end
 
   #IL COMPTE LE NOMBRE DE X OU BIEN LE NOMBRE DE O QU IL Y A DANS L ARRAY CELLS
@@ -32,19 +31,19 @@ class Board
     cells.count {|cell| cell == "X" || cell == "O"}
   end
 
-  #RETOURNE TRUE SI LA VALEUR ENTRE EST DEJA PRISE A LA CASE INPUT - 1
-  def taken?(input)
-    position(input) == "X" || position(input) == "O"
+  #RETOURNE TRUE SI LA VALEUR ENTRE EST DEJA PRISE A LA CASE INPUT - 1 DU JEU (L'ARRAY CELLS COMMENCE A 0 ET LE TABLEAU DU JEU COMMENCE A 1)
+  def take?(input)
+    cells[input - 1] == "X" || cells[input - 1] == "O"
   end
 
-  #RETOURNE TRUE SI LA VALEUR ENTRE CORRESPOND A UNE CASE INPUT - 1 DEJA PRISE ET SI ELLE EST COMPRISE ENTRE 1 ET 9
+  #RETOURNE TRUE SI L'INPUT ENTRE CORRESPOND A UNE CASE INPUT - 1 DEJA PRISE DANS LE JEU ET SI ELLE EST COMPRISE ENTRE 1 ET 9
   def valid_move?(input)
     input = input.to_i
-    !(taken?(input)) && input.between?(1, 9)
+    !(take?(input)) && input.between?(1, 9)
   end
 
-
-  def update(input, player)
+  #LA CASE INPUT - 1 DU TABLEAU CELLS PREND COMME VALEUR LE SIGNE (TOKEN) DE PLAYER
+  def newposition(input, player)
     input = input.to_i
     cells[input -1] = player.token
   end
