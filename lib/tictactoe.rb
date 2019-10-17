@@ -6,7 +6,7 @@ Bundler.require
 require_relative 'player'
 require_relative 'game'
 require_relative 'board'
-require_relative 'players/human'
+require_relative 'human'
 
 puts "Welcome to Tic Tac Toe!"
 
